@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🚜 Jogo do Trator: Fazenda para Cidade</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            user-select: none;
+        }
+        h1 {
+            color: #2e7d32;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        #game-container {
+            margin: 20px auto;
+            width: 420px;
+            position: relative;
+            background-color: #81c784;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        #game-board {
+            width: 400px;
+            height: 400px;
+            background-color: #a5d6a7;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #2e7d32;
+            border-radius: 5px;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        #market-screen {
+            width: 400px;
+            height: 400px;
+            background-color: #ffecb3;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: none;
+            border: 3px solid #ffa000;
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+        #tractor {
+            font-size: 30px;
+            position: absolute;
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+        .food {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            font-size: 25px;
+            text-align: center;
+            z-index: 5;
+            transition: all 0.3s;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+        }
+        #market {
+            font-size: 40px;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            z-index: 5;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+        #fuel-station {
+            font-size: 40px;
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            z-index: 5;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+        #controls {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .control-row {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        button:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+        }
+        #score, #fuel, #level {
+            font-size: 18px;
+            margin: 10px;
+            padding: 8px 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #cash-register {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+        #thanks-message {
+            font-size: 22px;
+            margin: 20px;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        #back-to-farm {
+            background-color: #ff9800;
+            padding: 12px 25px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #back-to-farm:hover {
+            background-color: #f57c00;
+        }
+        #game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+            color: white;
+            border-radius: 5px;
+        }
+        #restart-btn {
+            background-color: #f44336;
+            margin-top: 20px;
+        }
+        #restart-btn:hover {
+            background-color: #d32f2f;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 5px auto;
+            overflow: hidden;
+        }
+        #fuel-bar {
+            height: 100%;
+            width: 100%;
+            background-color: #4caf50;
+            transition: width 0.3s;
+        }
+        #tutorial {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 40;
+            max-width: 350px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        #close-tutorial {
+            background-color: #2196F3;
+            margin-top: 15px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes collect {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        .collect-animation {
+            animation: collect 0.5s forwards;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚜 Jogo do Trator: Fazenda para Cidade 🌆</h1>
+    <div id="game-container">
+        <div id="game-board">
+            <div id="tractor">🚜</div>
+            <div id="market">🏪</div>
+            <div id="fuel-station">⛽</div>
+        </div>
+        
+        <div id="market-screen">
+            <div id="cash-register">💰</div>
+            <h2>Mercado da Cidade</h2>
+            <div id="thanks-message">Obrigado, produtor rural! Seus alimentos foram vendidos!</div>
+            <p>Você zerou seus pontos e pode continuar coletando!</p>
+            <div id="score">Pontos: 0</div>
+            <button id="back-to-farm">Voltar para a Fazenda</button>
+        </div>
+        
+        <div id="game-over">
+            <h2>Fim de Jogo!</h2>
+            <p>Você ficou sem combustível!</p>
+            <p>Sua pontuação final: <span id="final-score">0</span></p>
+            <button id="restart-btn">Jogar Novamente</button>
+        </div>
+        
+        <div id="tutorial">
+            <h2>Como Jogar</h2>
+            <p>➡️ Use os botões ou setas do teclado para mover o trator</p>
+            <p>🌽 Colete os alimentos (+50 pontos cada)</p>
+            <p>🏪 Quando chegar a 500 pontos, vá ao mercado para zerar</p>
+            <p>⛽ Reabasteça no posto de gasolina</p>
+            <p>⏱️ Cuidado com o combustível!</p>
+            <button id="close-tutorial">Começar!</button>
+        </div>
+        
+        <div id="fuel">⛽ Combustível: <span id="fuel-value">100</span>%</div>
+        <div class="progress-bar"><div id="fuel-bar"></div></div>
+        <div id="score">Pontos: 0</div>
+        
+        <div id="controls">
+            <div class="control-row">
+                <button id="up">⬆️</button>
+            </div>
+            <div class="control-row">
+                <button id="left">⬅️</button>
+                <button id="right">➡️</button>
+            </div>
+            <div class="control-row">
+                <button id="down">⬇️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configurações do jogo
+        const board = document.getElementById("game-board");
+        const marketScreen = document.getElementById("market-screen");
+        const tractor = document.getElementById("tractor");
+        const market = document.getElementById("market");
+        const fuelStation = document.getElementById("fuel-station");
+        const scoreDisplay = document.getElementById("score");
+        const fuelDisplay = document.getElementById("fuel-value");
+        const fuelBar = document.getElementById("fuel-bar");
+        const backToFarmBtn = document.getElementById("back-to-farm");
+        const gameOverScreen = document.getElementById("game-over");
+        const restartBtn = document.getElementById("restart-btn");
+        const finalScoreDisplay = document.getElementById("final-score");
+        const tutorialScreen = document.getElementById("tutorial");
+        const closeTutorialBtn = document.getElementById("close-tutorial");
+        
+        // Variáveis do jogo
+        let score = 0;
+        let fuel = 100;
+        let tractorX = 180;
+        let tractorY = 180;
+        let tractorDirection = 'right';
+        let foods = [];
+        let gameInterval;
+        let fuelConsumptionRate = 0.5;
+        let isGameRunning = false;
+        
+        // Pontos por alimento e meta para vender
+        const POINTS_PER_FOOD = 50;
+        const MARKET_GOAL = 500;
+        
+        // Sons do jogo
+        const collectSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+        const marketSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-cash-register-purchase-881.mp3');
+        const fuelSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-quick-jump-arcade-game-239.mp3');
+        const gameOverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-retro-arcade-lose-2027.mp3');
+        
+        // Posiciona o trator e os pontos de interesse
+        function positionElements() {
+            tractor.style.left = tractorX + "px";
+            tractor.style.top = tractorY + "px";
+            market.style.right = "20px";
+            market.style.bottom = "20px";
+            fuelStation.style.left = "20px";
+            fuelStation.style.bottom = "20px";
+        }
+        
+        // Cria alimentos aleatórios
+        function spawnFood() {
+            if (foods.length < 5) {
+                const food = document.createElement("div");
+                food.className = "food";
+                food.textContent = ["🌽", "🍎", "🥕", "🍇", "🥔", "🍓"][Math.floor(Math.random() * 6)];
+                
+                // Posiciona longe do trator e do mercado
+                let foodX, foodY;
+                do {
+                    foodX = Math.random() * 350;
+                    foodY = Math.random() * 350;
+                } while (
+                    (foodX > tractorX - 50 && foodX < tractorX + 80 && 
+                     foodY > tractorY - 50 && foodY < tractorY + 80) ||
+                    (foodX > 300 && foodY > 300) // Evita spawn perto do mercado
+                );
+                
+                food.style.left = foodX + "px";
+                food.style.top = foodY + "px";
+                
+                board.appendChild(food);
+                foods.push(food);
+            }
+        }
+        
+        // Verifica colisão com alimentos
+        function checkCollision() {
+            foods.forEach((food, index) => {
+                const foodRect = food.getBoundingClientRect();
+                const tractorRect = tractor.getBoundingClientRect();
+                
+                if (
+                    tractorRect.left < foodRect.right &&
+                    tractorRect.right > foodRect.left &&
+                    tractorRect.top < foodRect.bottom &&
+                    tractorRect.bottom > foodRect.top
+                ) {
+                    // Coletou o alimento!
+                    food.classList.add("collect-animation");
+                    collectSound.play();
+                    
+                    setTimeout(() => {
+                        board.removeChild(food);
+                        foods.splice(index, 1);
+                    }, 300);
+                    
+                    // Aumenta os pontos por alimento
+                    score += POINTS_PER_FOOD;
+                    scoreDisplay.textContent = `Pontos: ${score}`;
+                    
+                    // Adiciona um pouco de combustível ao coletar comida
+                    addFuel(5);
+                    
+                    // Verifica se chegou à meta de pontos
+                    if (score >= MARKET_GOAL) {
+                        showMarketMessage();
+                    } else {
+                        spawnFood();
+                    }
+                }
+            });
+            
+            // Verifica se chegou no posto de gasolina
+            checkFuelStationCollision();
+        }
+        
+        function showMarketMessage() {
+            const message = document.createElement("div");
+            message.textContent = `Vá ao mercado para vender seus ${MARKET_GOAL} pontos!`;
+            message.style.position = "absolute";
+            message.style.top = "50%";
+            message.style.left = "50%";
+            message.style.transform = "translate(-50%, -50%)";
+            message.style.backgroundColor = "white";
+            message.style.padding = "10px 20px";
+            message.style.borderRadius = "10px";
+            message.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+            message.style.zIndex = "100";
+            board.appendChild(message);
+            
+            setTimeout(() => {
+                board.removeChild(message);
+            }, 2000);
+        }
+        
+        function checkFuelStationCollision() {
+            const fuelRect = fuelStation.getBoundingClientRect();
+            const tractorRect = tractor.getBoundingClientRect();
+            
+            if (
+                tractorRect.left < fuelRect.right &&
+                tractorRect.right > fuelRect.left &&
+                tractorRect.top < fuelRect.bottom &&
+                tractorRect.bottom > fuelRect.top
+            ) {
+                refuel();
+            }
+        }
+        
+        // Verifica se chegou no mercado com pontos suficientes
+        function checkMarketCollision() {
+            const marketRect = market.getBoundingClientRect();
+            const tractorRect = tractor.getBoundingClientRect();
+            
+            if (
+                tractorRect.left < marketRect.right &&
+                tractorRect.right > marketRect.left &&
+                tractorRect.top < marketRect.bottom &&
+                tractorRect.bottom > marketRect.top &&
+                score >= MARKET_GOAL
+            ) {
+                enterMarket();
+            }
+        }
+        
+        // Entra no mercado para zerar pontos
+        function enterMarket() {
+            board.style.display = "none";
+            marketScreen.style.display = "block";
+            marketSound.play();
+            
+            // Zera os pontos
+            score = 0;
+            scoreDisplay.textContent = `Pontos: 0`;
+        }
+        
+        // Reabastece o trator
+        function refuel() {
+            if (fuel < 100) {
+                addFuel(30);
+                fuelSound.play();
+                
+                // Efeito visual
+                tractor.style.transform = "scale(1.2)";
+                setTimeout(() => {
+                    tractor.style.transform = "scale(1)";
+                }, 300);
+            }
+        }
+        
+        // Adiciona combustível
+        function addFuel(amount) {
+            fuel = Math.min(100, fuel + amount);
+            updateFuelDisplay();
+        }
+        
+        // Volta para a fazenda
+        backToFarmBtn.addEventListener("click", () => {
+            board.style.display = "block";
+            marketScreen.style.display = "none";
+            
+            // Reposiciona o trator longe do mercado
+            tractorX = 100;
+            tractorY = 100;
+            positionElements();
+            
+            spawnFood();
+        });
+        
+        // Atualiza o combustível
+        function consumeFuel() {
+            fuel = Math.max(0, fuel - fuelConsumptionRate);
+            updateFuelDisplay();
+            
+            if (fuel <= 0 && isGameRunning) {
+                gameOver();
+            }
+        }
+        
+        function updateFuelDisplay() {
+            fuelDisplay.textContent = Math.floor(fuel);
+            fuelBar.style.width = `${fuel}%`;
+            
+            // Muda a cor conforme o combustível diminui
+            if (fuel < 30) {
+                fuelBar.style.backgroundColor = "#f44336";
+            } else if (fuel < 60) {
+                fuelBar.style.backgroundColor = "#ff9800";
+            } else {
+                fuelBar.style.backgroundColor = "#4caf50";
+            }
+        }
+        
+        // Fim de jogo
+        function gameOver() {
+            isGameRunning = false;
+            clearInterval(gameInterval);
+            gameOverSound.play();
+            
+            finalScoreDisplay.textContent = score;
+            gameOverScreen.style.display = "flex";
+        }
+        
+        // Reseta o jogo
+        function resetGame() {
+            score = 0;
+            fuel = 100;
+            tractorX = 180;
+            tractorY = 180;
+            fuelConsumptionRate = 0.5;
+            
+            positionElements();
+            
+            foods.forEach(food => board.removeChild(food));
+            foods = [];
+            
+            scoreDisplay.textContent = `Pontos: 0`;
+            updateFuelDisplay();
+            
+            board.style.display = "block";
+            marketScreen.style.display = "none";
+            gameOverScreen.style.display = "none";
+            
+            spawnFood();
+            startGame();
+        }
+        
+        // Controles do trator
+        function moveTractor(direction) {
+            if (!isGameRunning) return;
+            
+            // Atualiza a direção do trator
+            tractorDirection = direction;
+            
+            // Move o trator
+            switch(direction) {
+                case 'up':
+                    if (tractorY > 0) {
+                        tractorY -= 20;
+                        tractor.style.top = tractorY + "px";
+                        tractor.textContent = "🚜";
+                        tractor.style.transform = "rotate(0deg)";
+                    }
+                    break;
+                case 'down':
+                    if (tractorY < 360) {
+                        tractorY += 20;
+                        tractor.style.top = tractorY + "px";
+                        tractor.textContent = "🚜";
+                        tractor.style.transform = "rotate(180deg)";
+                    }
+                    break;
+                case 'left':
+                    if (tractorX > 0) {
+                        tractorX -= 20;
+                        tractor.style.left = tractorX + "px";
+                        tractor.textContent = "🚜";
+                        tractor.style.transform = "rotate(270deg)";
+                    }
+                    break;
+                case 'right':
+                    if (tractorX < 360) {
+                        tractorX += 20;
+                        tractor.style.left = tractorX + "px";
+                        tractor.textContent = "🚜";
+                        tractor.style.transform = "rotate(90deg)";
+                    }
+                    break;
+            }
+            
+            checkCollision();
+            checkMarketCollision();
+            consumeFuel();
+        }
+        
+        // Configura controles de teclado
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp':
+                    moveTractor('up');
+                    break;
+                case 'ArrowDown':
+                    moveTractor('down');
+                    break;
+                case 'ArrowLeft':
+                    moveTractor('left');
+                    break;
+                case 'ArrowRight':
+                    moveTractor('right');
+                    break;
+            }
+        });
+        
+        // Configura controles de botão
+        document.getElementById("up").addEventListener("click", () => moveTractor('up'));
+        document.getElementById("down").addEventListener("click", () => moveTractor('down'));
+        document.getElementById("left").addEventListener("click", () => moveTractor('left'));
+        document.getElementById("right").addEventListener("click", () => moveTractor('right'));
+        
+        // Botão de reiniciar
+        restartBtn.addEventListener("click", resetGame);
+        
+        // Fecha o tutorial
+        closeTutorialBtn.addEventListener("click", () => {
+            tutorialScreen.style.display = "none";
+            startGame();
+        });
+        
+        // Inicia o jogo
+        function startGame() {
+            isGameRunning = true;
+            positionElements();
+            spawnFood();
+            
+            // Gera novos alimentos periodicamente
+            gameInterval = setInterval(() => {
+                if (isGameRunning) {
+                    spawnFood();
+                    
+                    // Consome combustível mesmo quando parado
+                    if (fuel > 0) {
+                        fuel = Math.max(0, fuel - 0.1);
+                        updateFuelDisplay();
+                        
+                        if (fuel <= 0) {
+                            gameOver();
+                        }
+                    }
+                }
+            }, 3000);
+        }
+        
+        // Mostra o tutorial inicial
+        tutorialScreen.style.display = "block";
+    </script>
+</body>
+</html>

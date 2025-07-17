@@ -1,0 +1,7 @@
+# Agrinho-2025
+Quizizz: Conexão entre Campo e Cidade
+Este Quizizz é um convite para desvendar a alma da relação que nos conecta, seres humanos, ao espaço que nos alimenta e ao ambiente que nos abriga. Nele, mergulharemos de forma leve e descomplicada na interdependência vibrante entre o campo e a cidade. É um convite para enxergar além das fronteiras geográficas, compreendendo que, no fundo, somos todos partes de uma mesma história, onde a plantação que brota da terra e a inovação que floresce no asfalto se encontram e se completam.
+
+Nosso objetivo é ir além dos conceitos, buscando entender o fluxo de vida que pulsa entre esses dois mundos. Queremos que você perceba como a colheita generosa do agricultor se transforma em sustento nas mesas urbanas, e como a tecnologia e os serviços das cidades chegam ao campo, impulsionando novas formas de trabalho e bem-estar. É uma jornada para valorizar cada elo dessa corrente, desde o alimento fresco que chega à sua casa até a oportunidade que uma cidade grande pode oferecer a alguém do interior.
+
+Ao final, esperamos que você se sinta mais conectado a essa teia de relações. Que o Quizizz inspire uma reflexão sobre como podemos construir um futuro mais equilibrado e justo, onde campo e cidade prosperem juntos, lado a lado, em uma parceria que respeite as pessoas e o planeta. Porque, no fim das contas, a conexão entre campo e cidade é, antes de tudo, uma conexão entre nós.

@@ -1,0 +1,2 @@
+# Agrinho2025
+Bilu, o simpático personagem, vive tranquilamente no seu campo cercado de árvores e natureza. Um dia, ele decide embarcar em uma aventura e parte com seu carrinho vermelho, explorando novos lugares além do campo verde. Ao atravessar a estrada movimentada, Bilu sente o desafio de se aventurar fora da sua zona de conforto. Logo, ele chega à cidade cheia de prédios altos e novidades. Cada cenário traz para Bilu novas experiências, mostrando que crescer e explorar o mundo pode ser uma jornada cheia de surpresas e aprendizados.

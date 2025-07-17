@@ -1,0 +1,1 @@
+O projeto demonstra o processo de fabricação do pão, de forma simples para facilitar o entendimento do jogador. Para jogar, basta iniciar o projeto e guiar seu mouse por cima dos trigos, assim, o trator e o caminhão vai coletá-los automaticamente.

@@ -1,0 +1,140 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8fa;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background-color: #2a9d8f;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.nav-buttons a.btn {
+  background-color: #e76f51;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons a.btn:hover {
+  background-color: #d65a3b;
+}
+
+/* Main content */
+main {
+  flex: 1;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Introdução */
+.intro {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  margin-bottom: 2rem;
+}
+
+.intro h2 {
+  color: #264653;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.intro p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Benefícios */
+.benefits h2 {
+  text-align: center;
+  color: #264653;
+  margin-bottom: 1.5rem;
+  font-size: 1.9rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card h3 {
+  color: #2a9d8f;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Rodapé */
+footer {
+  background-color: #264653;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+  }
+  .nav-buttons {
+    margin-top: 0.8rem;
+  }
+  .nav-buttons a.btn {
+    margin-left: 0;
+    margin-right: 0.8rem;
+  }
+}

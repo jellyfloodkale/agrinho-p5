@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página produto</title>
+    <link rel="stylesheet" href="estilo/stylePageProduct.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <p id="button-home"><a href="./paginaPrincipal.html" onclick="LimparLCStorage()">VOLTAR</a></p>
+            <p id="logo"> <img src="imagens/LogoMelhorada.png" alt="Logo" ></p>
+            <p id="icon-carrinho"> <a href="./carrinhoPage.html"><img src="imagens/CestaCarrinho.png" alt="Carrinho"></a></p>
+        </nav>
+    </header>
+    <main>
+        <section class="section-infoProduto">
+            <div class="Div-ImgProduto">
+                <img id="ImgProd" src="" alt="Imagem Produto">
+            </div>
+            <div class="Div-infoEscrita">
+                <h1 id="NomeProd">Nome do Produto</h1>
+                <h2 id="ValorProd">R$ Valor * a Quantidade Kg</h2>
+                <div class="Div-infoEscrita-input">
+                <span class="span-button-addCar"><input type="button" value="Adicionar ao Carrinho" id="BtnAdd"></span>
+                <span class="span-input-Qtd"><input type="number" name="QtdP" id="QtdP" placeholder="Quantidade" min="1" max="99" required></span>
+                <span class="span-aviso">Clique no ícone de cesta no canto superior direito, para acessar o carrinho!</span>
+            </div>
+                
+            </div>
+        </section>
+    </main>
+</body>
+    <script src="./JS/PageProduto.js"></script>
+</html>

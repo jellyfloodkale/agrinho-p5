@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background-color: #f0f8ff; /* Alice Blue */
+}
+
+h1 {
+  margin-top: 20px;
+  color: #2e8b57; /* Sea Green */
+}
+
+p {
+  color: #555; /* Dim Gray */
+}

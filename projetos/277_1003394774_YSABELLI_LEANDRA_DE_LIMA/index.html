@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>História e Cultura - Festividade Do Campo à Cidade - Clevelândia - PR</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    Cultura e História - Festividade Do Campo à Cidade - Clevelândia - PR
+  </header>
+
+  <div class="container">
+    <div id="p5-container"></div>
+
+    <h2>Origens da Festividade</h2>
+    <p>A festividade "Do Campo à Cidade" teve início em Clevelândia-PR como uma forma de celebrar a cultura local e valorizar o trabalho dos produtores rurais.</p>
+
+    <h2>Evolução ao Longo dos Anos</h2>
+    <p>Desde sua primeira edição, o evento cresceu e passou a incluir atrações como feiras agrícolas, shows regionais e exposições culturais.</p>
+
+    <h2>Tradições e Cultura Local</h2>
+    <p>Durante a festividade, acontecem desfiles típicos, apresentações folclóricas e competições tradicionais, que representam a rica herança cultural da região.</p>
+
+    <h2>Música Regional</h2>
+    <p>A música tem um papel essencial no evento, com apresentações de artistas locais e estilos tradicionais como sertanejo raiz e música folclórica.</p>
+
+    <h2>Galeria de Fotos e Vídeos</h2>
+    <div class="gallery" id="gallery">
+      <div class="gallery-item">
+        <img src="agricultura.jpg" alt="Imagem do evento" />
+        <div class="btn-group">
+          <button class="download-btn" onclick="downloadImage('imagem1.jpeg')">Baixar</button>
+          <button class="delete-btn" onclick="removeImage(this)">Excluir</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="imagem2.jpeg" alt="Imagem do evento" />
+        <div class="btn-group">
+          <button class="download-btn" onclick="downloadImage('plantio.jpg')">Baixar</button>
+          <button class="delete-btn" onclick="removeImage(this)">Excluir</button>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="agricultura01.jpg" alt="Imagem do evento" />
+        <div class="btn-group">
+          <button class="download-btn" onclick="downloadImage('imagem3.jpeg')">Baixar</button>
+          <button class="delete-btn" onclick="removeImage(this)">Excluir</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-section">
+      <h3>Envie suas fotos</h3>
+      <input type="file" id="fileUpload" accept="image/*" />
+      <button onclick="uploadImage()">Enviar</button>
+    </div>
+
+    <h2>Importância Cultural</h2>
+    <p>O evento é um símbolo da identidade clevelandense, promovendo a união entre os moradores da zona rural e urbana.</p>
+  </div>
+
+  <footer>
+    &copy; 2025 Festividade Do Campo à Cidade - Clevelândia-PR
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="sketch.js"></script>
+  <script>
+    function uploadImage() {
+      const fileInput = document.getElementById('fileUpload');
+      const gallery = document.getElementById('gallery');
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+
+        if (!file.type.startsWith('image/')) {
+          alert('Por favor, envie apenas arquivos de imagem.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const galleryItem = document.createElement('div');
+          galleryItem.classList.add('gallery-item');
+
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Imagem enviada';
+
+          const btnGroup = document.createElement('div');
+          btnGroup.classList.add('btn-group');
+
+          const downloadBtn = document.createElement('button');
+          downloadBtn.classList.add('download-btn');
+          downloadBtn.textContent = 'Baixar';
+          downloadBtn.onclick = function () {
+            downloadImage(e.target.result);
+          };
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.classList.add('delete-btn');
+          deleteBtn.textContent = 'Excluir';
+          deleteBtn.onclick = function () {
+            removeImage(this);
+          };
+
+          btnGroup.appendChild(downloadBtn);
+          btnGroup.appendChild(deleteBtn);
+
+          galleryItem.appendChild(img);
+          galleryItem.appendChild(btnGroup);
+
+          gallery.appendChild(galleryItem);
+        };
+
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function downloadImage(imageSrc) {
+      const link = document.createElement('a');
+      link.href = imageSrc;
+      link.download = 'imagem.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function removeImage(button) {
+      const galleryItem = button.closest('.gallery-item');
+      if (galleryItem) {
+        galleryItem.remove();
+      }
+    }
+  </script>
+</body>
+</html>

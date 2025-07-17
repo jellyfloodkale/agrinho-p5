@@ -1,0 +1,1 @@
+nesse codigo eu tive ajuda do chatgpt usando a plataforma p5js web editor com a criação do codigo porem as mensagens e interações possiveis fui eu quem criei sozinho e a principal premissa desse codigo é mostrar a conexão campo-cidade.

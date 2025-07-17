@@ -1,0 +1,561 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    color: white;
+    background-image: url('imagens/campo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden; 
+}
+
+.game-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container, .menu-creditos {
+    position: absolute;
+    width: 90vw;
+    max-width: 550px;
+    padding: 30px 40px;
+    text-align: center;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.menu-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('imagens/predio.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu-creditos {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.menu-titulo {
+    color: #28a745; 
+    font-size: 3.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+h3.festejando {
+    margin: 0.2em 0 20px 0;
+    font-weight: normal;
+}
+
+.menu-botoes button {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-botoes button:hover {
+    background-color: #218838; 
+    transform: translateY(-3px);
+}
+
+.menu-creditos h2 {
+    color: #f0ad4e;
+    font-size: 2.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0 0 20px 0;
+}
+
+.menu-creditos p {
+    color: #f0f0f0;
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.nome-destaque {
+    color: darkgreen; 
+    font-weight: bold;
+}
+
+#tabuleiro-jogo {
+    position: absolute;
+    bottom: 90px;
+    left: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    background-color: #6d4c41;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.lote-terra {
+    width: 150px;
+    height: 150px;
+    background-color: #a1887f;
+    border: 3px solid #593d2b;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+}
+
+.lote-terra:hover {
+    transform: scale(1.05);
+}
+
+.lote-terra.plantado {
+    background-color: #558b2f;
+    border-color: #33691e;
+}
+
+.lote-terra.pronto-para-colher {
+    background-color: green;
+    border-color: darkgreen;
+}
+
+.lote-terra.pronto-para-colher::before {
+    content: attr(data-emoji);
+    font-size: 80px;
+}
+
+.lote-terra.trancado {
+    background-color: #4e342e;
+    cursor: not-allowed;
+}
+
+.lote-terra.trancado::before {
+    content: '🔒 R$' attr(data-custo);
+    opacity: 0.5;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+#fazendeiro {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url('imagens/fazendeiro.png');
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    transition: all 0.1s linear;
+}
+
+#cena-cidade {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#predio-verde-loja {
+    position: absolute;
+    bottom: 14vh;
+    left: 80vw;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 350px;
+    background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.letreiro {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #6d4c41;
+    color: #f7d96b;
+    padding: 5px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid #4e342e;
+    z-index: 2;
+}
+
+.porta {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 90px;
+    background-color: #4e342e;
+    border: 3px solid #3e2723;
+    border-radius: 5px 5px 0 0;
+}
+
+.janela {
+    position: absolute;
+    width: 40px;
+    height: 50px;
+    background-color: #f7d96b;
+    border-radius: 3px;
+    border: 3px solid #4e342e;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.janela.j1 { top: 70px; left: 40px; }
+.janela.j2 { top: 70px; right: 40px; }
+.janela.j3 { top: 150px; left: 40px; }
+.janela.j4 { top: 150px; right: 40px; }
+
+#painel-loja {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 400px;
+    background-color: rgba(40, 40, 40, 0.9);
+    border: 3px solid #f7d96b;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    z-index: 30;
+}
+
+#painel-loja h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #f7d96b;
+}
+
+.item-da-loja {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.item-da-loja span:nth-child(2) {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.item-da-loja button {
+    padding: 5px 12px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.item-da-loja .botao-comprar {
+    background-color: #29b6f6;
+    color: white;
+    border-color: #0288d1;
+}
+
+.item-da-loja .botao-comprar:hover {
+    background-color: #0277bd;
+    border-color: white;
+    transform: scale(1.05);
+}
+
+.item-da-loja button:disabled {
+    background-color: #555;
+    color: #999;
+    border-color: #444;
+    cursor: default;
+}
+
+#botao-fechar-loja {
+    display: block;
+    margin: 20px auto 0;
+    padding: 8px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #d32f2f;
+    color: white;
+    border: 2px solid #b71c1c;
+}
+
+#botao-fechar-loja:hover {
+    background-color: #c62828;
+    border-color: white;
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#hud-jogo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 250px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: green;
+    font-size: 24px;
+    border: 2px solid darkgreen;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+#barra-sementes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#hud-jogo p {
+    margin: 0;
+}
+
+.slot-semente {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid #4e342e;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.slot-semente.selecionada {
+    border-color: #f7d96b; 
+    box-shadow: 0 0 10px #f7d96b; 
+    transform: scale(1.1);
+}
+#npc-guia {
+    position: absolute;
+    width: 45px;
+    height: 55px;
+    background-image: url('imagens/guiaa.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    bottom: 250px;
+    left: 450px; 
+}
+
+#painel-controles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 450px;
+    background-color: rgba(40, 40, 40, 0.95);
+    border: 3px solid #29b6f6;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 30;
+    text-align: center;
+}
+
+#painel-controles h3 {
+    margin-top: 0;
+    color: #29b6f6;
+}
+
+#painel-controles p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.lista-controles {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.lista-controles .tecla {
+    background-color: rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.lista-controles .acao {
+    text-align: left;
+}
+
+.dica-final {
+    text-align: center;
+    margin-top: 25px;
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 16px;
+}
+
+#botao-fechar-controles {
+    display: block;
+    margin: 20px auto 0;
+    padding: 8px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #d32f2f;
+    color: white;
+    border: 2px solid #b71c1c;
+}
+
+#botao-fechar-controles:hover {
+    background-color: #c62828;
+    border-color: white;
+}
+
+#npc-mercado {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background-image: url('imagens/npc_mercado.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    bottom: 10vh;
+    left: 65vw; 
+}
+
+#balao-fala {
+    position: absolute;
+    width: 280px;
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 16px;
+    z-index: 50; 
+}
+
+#balao-fala p {
+    margin: 0;
+}
+
+#balao-fala::after {
+    content: '';
+    position: absolute;
+    bottom: -19px; 
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: white; 
+}
+
+#npc-prefeito {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background-image: url('imagens/prefeito1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    bottom: 7vh;
+    left: 60vw;
+}
+
+#balao-vitoria {
+    position: absolute;
+    width: 320px;
+    background: white;
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #f7d96b; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 50; 
+}
+
+#balao-vitoria p {
+    margin: 0;
+}
+
+#balao-vitoria::after {
+    content: '';
+    position: absolute;
+    bottom: -23px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 12px solid transparent;
+    border-top-color: #f7d96b; 
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.95); }
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}

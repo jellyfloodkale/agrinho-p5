@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+:root{
+    --cor-01: #1A2601;
+    --cor-02: #324001;
+    --cor-03: #465902;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: white;
+    font-family: "Oswald", sans-serif;
+    background-color: var(--cor-02);
+}
+header{
+    width: 100%;
+    height: 10rem;
+}
+
+nav{
+    display: grid;
+    width: 100%;
+    background-color: var(--cor-01);
+}
+nav img{
+    height: 4rem;
+}
+#button-voltar{
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+}
+#button-voltar > a{
+    font-size: 1rem;
+    color: white;
+    padding-top: 1rem;
+    text-decoration: none;
+}
+#logo{
+    grid-column: 2;
+}
+main{
+    background-color: white;
+    width: 50%;
+    margin-left: 23%;
+    padding: 3rem;
+}
+.section-lista-produtos > h1{
+    text-align: center;
+    color: var(--cor-03);
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+#ul-lista-produtos{
+    background-color: white;
+    margin-left: 25%;
+    text-decoration: none;
+    height: auto;
+    width: 50%;
+}
+#ul-lista-produtos li{
+    list-style-type: none;
+    padding: 2rem 0 2rem 1rem;
+    font-size: 0.6rem;
+    display: grid;
+}
+#ul-lista-produtos li h1{
+    font-size: 1.2rem;
+    font-weight: lighter;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#ul-lista-produtos li p{
+    font-size: 0.9rem;
+    font-weight: bolder;
+}
+#ul-lista-produtos li img{
+    height: 2rem;
+    grid-column: 18;
+    grid-row: 1;
+}
+p#p-precoProd{
+    grid-row: 2;
+    grid-column: 1;
+}
+p#p-QtdProd{
+    grid-row: 3;
+    grid-column: 1;
+    margin-top: 0.5rem;
+    color: var(--cor-03);
+}
+#ul-lista-produtos li:nth-child(2){
+    background-color: gray;
+}
+.div-info-total-lista{
+    margin-top: 5rem;
+    text-align: center;
+    background-color: var(--cor-02);
+    border-radius: 15px;
+}
+.div-info-total-lista span {
+    margin: 1rem 0;
+    padding: 1rem;
+    color: white;
+    display: grid;
+}
+.div-info-total-lista p{
+    grid-column: 2;
+}
+#BtnPegadinha{
+    border: none;
+    background-color: white;
+    width: 10rem;
+    margin-left: 40%;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    color: var(--cor-03);
+    font-size: 1rem;
+    border-radius: 15px;
+}
+#BtnPegadinha:hover{
+    background-color: var(--cor-01);
+    color: white;
+}
+.section-lista-produtos span.aviso{
+    font-size: 1rem;
+    background-color: white;
+    color: red;
+    font-weight: bolder;
+    margin-left: 25%;
+}
+#p-preco, #p-frete{
+    font-size: 1.3rem;
+    font-weight: bolder;
+}

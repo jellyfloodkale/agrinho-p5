@@ -1,0 +1,1 @@
+Projeto desenvolvido pelo p5.js utilizando de um jogo interativo para conhecimento. O jogador controla a demanda dos recursos afim de evitar que uma crise de alimentos aconteça na cidade. O objetivo é demonstrar a relação Campo-Cidade, e como sua existencia é importante nos dias atuais.

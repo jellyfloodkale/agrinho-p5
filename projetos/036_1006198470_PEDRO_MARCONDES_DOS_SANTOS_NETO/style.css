@@ -1,0 +1,29 @@
+/* Estilos globais para o corpo da página */
+body {
+    font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f4f8; /* Cor de fundo clara para a página */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total do elemento */
+}
+
+/* Estilos para o contêiner do jogo */
+.game-container {
+    border-radius: 15px; /* Cantos arredondados */
+    overflow: hidden; /* Garante que o conteúdo não transborde os cantos arredondados */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+    background-color: #ffffff; /* Fundo branco para o contêiner */
+    position: relative; /* Necessário para o posicionamento do canvas dentro */
+    width: 800px; /* Largura explícita para corresponder ao canvas */
+    height: 600px; /* Altura explícita para corresponder ao canvas */
+}
+
+/* Estilos para o canvas do p5.js */
+canvas {
+    display: block; /* Remove o espaço extra abaixo do canvas */
+    border-radius: 15px; /* Aplica cantos arredondados também ao canvas */
+}

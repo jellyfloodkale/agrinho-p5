@@ -1,0 +1,5 @@
+O projeto "Cidade Sustentável" é uma simulação interativa desenvolvida na linguagem JavaScript utilizando a biblioteca p5.js. Ele tem como objetivo promover a conscientização sobre a importância da agricultura e do consumo de alimentos naturais na melhoria da qualidade de vida nas cidades.
+
+Na interface do jogo, a tela é dividida em duas partes: o campo, localizado à esquerda, onde as verduras são cultivadas, e a cidade, à direita, que depende dessas verduras para melhorar sua qualidade de vida. A cada segundo, uma nova verdura aparece aleatoriamente no campo. O jogador deve clicar sobre essas verduras para coletá-las. Após a coleta, as verduras podem ser entregues na cidade por meio de um botão, o que aumenta um indicador de qualidade de vida urbana. Cada verdura entregue equivale a 2% de melhoria, até o máximo de 100%.
+
+O projeto trabalha conceitos como sustentabilidade, responsabilidade ambiental e produção de alimentos saudáveis, além de introduzir fundamentos de programação, interação gráfica, lógica condicional e eventos em p5.js.

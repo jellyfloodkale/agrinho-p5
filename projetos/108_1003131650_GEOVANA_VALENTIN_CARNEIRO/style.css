@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#start-screen, #story-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  font-size: 24px;
+  display: none;
+}
+
+.start-button, .continue-button {
+  background-color: #f1c40f;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#game-canvas {
+  display: none;
+  background-color: #e4e4e4;
+  margin: 0 auto;
+}

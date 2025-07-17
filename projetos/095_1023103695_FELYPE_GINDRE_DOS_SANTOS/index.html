@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Prédio Verde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="menu-container">
+            <h1 class="menu-titulo">O Prédio Verde</h1>
+            <h3 class="festejando">Festejando a Conexão Campo-Cidade</h3>
+            <div class="menu-botoes">
+                <button id="botaocreditos">Créditos</button>
+                <button id="botaojogar">Jogar</button>
+            </div>
+        </div>
+        <div class="menu-creditos hidden">
+            <h2>Créditos</h2>
+            <p><strong>Desenvolvimento:</strong><br><span class="nome-destaque">Felype Gindre</span></p>
+            <p><strong>Imagens e Sons:</strong><br><span class="nome-destaque">Unsplash.com / freesound.org / pixabaycom </span></p>
+            <p><strong>Agradecimentos:</strong><br><span class="nome-destaque">Agradeço a professora Cássia, sem ela, nada seria possível.</span></p>
+            <div class="menu-botoes">
+              <button id="botaoVoltar">Voltar</button>
+            </div>
+       </div>
+
+        <div id="hud-jogo" class="hidden">
+            <p>Dinheiro: R$ <span id="valor-dinheiro">0</span></p>
+            <div id="barra-sementes"></div>
+        </div>
+        
+        <div id="tabuleiro-jogo" class="hidden">
+            <div class="lote-terra"></div>
+            <div class="lote-terra trancado" data-custo="50"></div>
+            <div class="lote-terra trancado" data-custo="100"></div>
+            <div class="lote-terra trancado" data-custo="200"></div>
+        </div>
+
+        <div id="cena-cidade" class="hidden">
+            <div id="predio-verde-loja">
+                <div class="letreiro">LOJA</div>
+              <div class="porta"></div>
+              <div class="janela j1"></div>
+              <div class="janela j2"></div>
+              <div class="janela j3"></div>
+              <div class="janela j4"></div>
+            </div>
+            <div id="painel-loja" class="hidden">
+                <h3>Loja de Sementes</h3>
+                <div id="itens-loja"></div>
+                <button id="botao-fechar-loja">Sair</button>
+            </div>
+        </div>
+      
+        <div id="fazendeiro" class="hidden"></div>
+      
+              <div id="npc-mercado" class="hidden"></div>
+
+        <div id="balao-fala" class="hidden">
+            <p>Por favor, plante essas sementes em todos os quatro terrenos para encher o estoque do mercado!</p>
+          
+          
+          
+          
+          
+</div>
+          <div id="npc-prefeito" class="hidden"></div>
+
+<div id="balao-vitoria" class="hidden">
+    <p>Parabéns! Você desbloqueou toda a fazenda e conseguiu alimentar a cidade!</p>
+          
+  
+          
+      <div id="npc-instrutor" class="hidden"></div>
+          <div id="painel-instrucoes" class="hidden">
+    <h3>Como Jogar</h3>
+    <p>Seu objetivo é ganhar dinheiro para expandir sua fazenda e comprar novas sementes!</p>
+    <button id="botao-fechar-instrucoes">Ok</button>
+</div>
+          
+          
+          
+          
+          
+<div id="npc-guia" class="hidden"></div>
+
+<div id="painel-controles" class="hidden">
+    <h3>Controles do Jogo</h3>
+    <div class="lista-controles">
+        <span class="tecla">WASD / Setas</span>
+        <span class="acao">: Mover o Fazendeiro</span>
+        <span class="tecla">Barra de Espaço</span>
+        <span class="acao">: Interagir / Plantar</span>
+    </div>
+    <p class="dica-final">Siga em frente para alcançar a cidade</p>
+    <button id="botao-fechar-controles">Entendi!</button>
+</div>
+          
+</div>
+      
+    </div>
+    <audio id="musica-fundo" loop src="sons/trilha_sonora.mp3"></audio>
+
+    <script src="sketch.js"></script>
+</body>
+</html>
